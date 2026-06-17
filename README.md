@@ -61,4 +61,4 @@ The tool is highly optimized and runs entirely on Python's **built-in core libra
 
 1. **Launch the tool:**
    ```bash
-   python obfuscateKhoaDev.py
+   python khoadevObfuscate.py
