@@ -1,6 +1,6 @@
 # 🛠️ Universal Payload Encoder & Obfuscator V3.0
 
-> **Admin & Developer:** Khoa Dev 👑
+> **Admin & Developer:** Khoa Dev - Vo Anh Khoa 2007
 
 ---
 
