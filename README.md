@@ -1,262 +1,64 @@
-# Khoa Dev - Universal Obfuscator V3.0
+# 🛠️ Universal Payload Encoder & Obfuscator V3.0
 
-## Giới thiệu
-
-**Universal Obfuscator V3.0** là công cụ đóng gói và làm rối mã nguồn đa ngôn ngữ được phát triển bởi **Khoa Dev**.
-
-Công cụ hỗ trợ xử lý mã nguồn của nhiều ngôn ngữ lập trình như:
-
-- Python
-- Lua / Luau
-- JavaScript
-
-Mục tiêu của dự án là biến đổi mã nguồn thành dạng khó đọc hơn bằng cách mã hóa dữ liệu, tạo biến ngẫu nhiên và sinh mã loader để thực thi lại nội dung gốc.
+> **Admin & Developer:** Khoa Dev 👑
 
 ---
 
-# Khoa Dev là Admin
+## 📘 Overview
+**Universal Obfuscator V3.0** is a powerful security tool written in Python, designed to encode and obfuscate source code across three popular languages: **Python (.py)**, **Lua/Luau (.lua)**, and **JavaScript (.js)**. 
 
-Khoa Dev là Admin chính của dự án.
-
-Admin chịu trách nhiệm:
-
-- Phát triển hệ thống
-- Quản lý mã nguồn
-- Cập nhật tính năng
-- Bảo trì công cụ
-- Kiểm tra và tối ưu hoạt động
+The tool protects intellectual property and prevents reverse engineering (decompilation) or unauthorized code inspection by transforming the original source into a complex, chaotic structure while fully preserving its original runtime functionality.
 
 ---
 
-# Tính năng
+## 🚀 Capabilities (What Admin Khoa Dev Can Do)
 
-## Hỗ trợ ngôn ngữ
+With Admin privileges and the integrated feature set, Khoa Dev can perform the following operations:
 
-Công cụ hỗ trợ:
-
-
-Python (.py)
-Lua / Luau (.lua)
-JavaScript (.js)
-
+* **Dynamic Multi-Language UI (i18n):** Seamlessly switch the console interface between English (`en`) and Vietnamese (`vi`) upon startup.
+* **Multi-Platform Target Support:** Quickly obfuscate script payloads written in Python, Lua, or JavaScript.
+* **Flexible Source Input Methods:** * Load existing script files (`.py`, `.lua`, `.js`) directly from the local computer.
+    * Paste source code directly into the terminal console, finalizing the input easily by typing `END` on a new line.
+* **Automated Output Generation:** Automatically export the obfuscated result with the correct corresponding file extension, calculating the precise payload size (in bytes) post-processing.
 
 ---
 
-## Chức năng chính
+## ⚙️ How the Engine Works
 
-Universal Obfuscator có thể:
+The obfuscation system operates through a combination of a **Shift Cipher (Key-based encryption)**, **Junk Code Injection**, and **Polymorphic Identifier Mutation**:
 
-- Mã hóa source code
-- Tạo payload đã được đóng gói
-- Làm rối tên biến
-- Sinh mã ngẫu nhiên (junk code)
-- Tạo loader giải mã khi chạy
-- Xuất file mới sau khi xử lý
-- Hỗ trợ nhập file hoặc dán code trực tiếp
+### 1. Polymorphic Stub Generation
+The system utilizes the `generate_confusing_name()` function to generate random variable identifiers consisting strictly of visually confusing characters: `I`, `l`, `O`, `0`, and `_`. The resulting variables are extremely difficult to distinguish with the naked eye (e.g., `lII_O0_l`, `O_0_IlI`).
 
----
+### 2. Junk Code Injection
+Before and after the core execution logic, the engine automatically injects 2 to 5 lines of meaningless code that complies with the target language's syntax. This disrupts static analysis tools and decompilers.
 
-# Cách hoạt động
-
-Quy trình xử lý:
-
-            SOURCE CODE
-
-                 |
-
-                 v
-
-         Đọc mã nguồn đầu vào
-
-                 |
-
-                 v
-
-          Encode dữ liệu
-
-                 |
-
-                 v
-
-    Tạo biến ngẫu nhiên + Junk Code
-
-                 |
-
-                 v
-
-      Tạo Polymorphic Stub
-
-                 |
-
-                 v
-
-          Xuất file mới
+### 3. Language-Specific Obfuscation Engines:
+* **Lua Target:** Characters are converted into their respective UTF-8 byte values and shifted by a randomized encryption key. At runtime, the script uses a decoder loop combined with `loadstring` or `load` to execute the payload directly in memory.
+* **Python Target:** Utilizes a list comprehension to shift character ordinals (`ord()`), flattening the entire script into a compressed **One-liner** executed via the `exec()` function.
+* **JavaScript Target:** Encrypts characters into an integer array, building a runtime decoder wrapper that compiles and triggers the payload via `new Function()`, compatible with both NodeJS and browser environments.
 
 ---
 
-# Cơ chế xử lý
+## 📦 System Requirements & Dependencies
 
-## Python Obfuscator
+The tool is highly optimized and runs entirely on Python's **built-in core libraries**, meaning **no external installations (such as `pip install ...`) are required**.
 
-Cách hoạt động:
+### Requirements:
+* **Python:** Version 3.x or higher.
+* **OS:** Fully compatible with Windows (CMD/PowerShell) and Linux/macOS (Terminal) utilizing standard ANSI color codes.
 
-- Chuyển ký tự thành mã Unicode
-- Thêm khóa mã hóa ngẫu nhiên
-- Tạo đoạn code giải mã
-- Thực thi bằng cơ chế loader
-
-Output:
-
-
-Python Source
-|
-v
-Encoded Data
-|
-v
-exec Loader
-
+### Standard Libraries Used:
+* `os`: Handles console clearing (`cls`/`clear`) and file path validation.
+* `time`: Delays execution slightly to generate the UI loading animations.
+* `random`: Generates randomized encryption keys, junk code density, and polymorphic variable strings.
+* `string`: Pulls standard character sets to construct random junk values.
+* `sys`: Controls standard output streams (`sys.stdout.write`) to render the dynamic progress loaders.
 
 ---
 
-## Lua / Luau Obfuscator
+## 💻 Step-by-Step Usage Guide
 
-Cách hoạt động:
-
-- Chuyển source thành byte UTF-8
-- Lưu dữ liệu dạng bảng
-- Giải mã bằng string.char
-- Thực thi bằng load/loadstring
-
-Output:
-
-
-Lua Source
-|
-v
-Byte Data
-|
-v
-Runtime Decode
-
-
----
-
-## JavaScript Obfuscator
-
-Cách hoạt động:
-
-- Chuyển ký tự thành mã số
-- Tạo mảng dữ liệu
-- Khôi phục bằng String.fromCharCode
-- Chạy bằng Function()
-
-Output:
-
-
-JS Source
-|
-v
-Encoded Array
-|
-v
-Dynamic Execute
-
-
----
-
-# Giao diện chương trình
-
-Tool có giao diện Terminal với:
-
-- Màu ANSI
-- Hiệu ứng loading
-- Thanh tiến trình
-- Hex dump animation
-- Hỗ trợ tiếng Anh và tiếng Việt
-
----
-
-# Cài đặt
-
-Yêu cầu:
-
-
-Python 3.x
-
-
-Kiểm tra Python:
-
-```bash
-python --version
-Cài thư viện
-
-Chạy:
-
-pip install -r requirements.txt
-Cách chạy
-
-Khởi động chương trình:
-
-python obfuscateKhoaDev.py
-Hướng dẫn sử dụng
-Bước 1: Chọn ngôn ngữ giao diện
-[1] English
-[2] Tiếng Việt
-Bước 2: Chọn ngôn ngữ cần làm rối
-[1] Python
-[2] Lua / Luau
-[3] JavaScript
-Bước 3: Chọn nguồn nhập
-
-Có 2 cách:
-
-[1] Chọn file từ máy tính
-
-[2] Dán code trực tiếp
-
-Nếu dán code:
-
-Kết thúc bằng:
-
-END
-Bước 4: Xuất file
-
-Nhập tên file:
-
-Ví dụ:
-
-output.py
-output.lua
-output.js
-Cấu trúc dự án
-KhoaDev/
-
-│
-
-├── obfuscateKhoaDev.py
-
-├── requirements.txt
-
-└── README.md
-Thông tin dự án
-Project:
-Universal Obfuscator V3.0
-
-Developer:
-Khoa Dev
-
-Language:
-Python
-
-Version:
-3.0
-Lưu ý
-
-Công cụ được tạo nhằm mục đích:
-
-Bảo vệ mã nguồn
-Nghiên cứu lập trình
-Học tập và phát triển phần mềm
-
-Không sử dụng
+1. **Launch the tool:**
+   ```bash
+   python obfuscateKhoaDev.py
